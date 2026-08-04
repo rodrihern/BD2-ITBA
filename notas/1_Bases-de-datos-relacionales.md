@@ -96,3 +96,10 @@ pueden ser n-arias (en general se trata de que sean binarias o no mayor a 3)
 
 ![](attachments/Pasted%20image%2020260804111740.png)
 
+
+## Esquemas de tablas
+
+Reglas
+
+![](attachments/Pasted%20image%2020260804112711.png)
+
