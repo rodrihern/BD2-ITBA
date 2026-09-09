@@ -106,3 +106,71 @@ si un insert dispara un trigger, y este falla, se hace un rollback de todo y el 
 
 ![](attachments/Pasted%20image%2020260825190055.png)
 
+## Procedural
+
+Si caemos en esto es porque decidimos que la aplicacion no se hace cargo de esto xd. (quien decidiria algo asi no? quien preferiria escribir algo procedural en sql antes que en el lenguaje en el que esta haciendo la app no?)
+
+### Ventajas 
+
+- aisla partes comunes existentes en la aplicacion delegandolas al dbms
+- eficiencia
+
+### Desventajas
+
+- Cada dbms tiene su propio lenguaje procedural
+
+### Sql procedural
+
+- Trigger
+- Stored Procedure
+- Funcion
+
+#### Postgres
+
+Declaracion de funciones
+
+```sql
+CREATE [ OR REPLACE ] FUNCTION nombre_funcion([ [ argmodo ] [  
+argnombre ] argtipo [, ...] ])  
+RETURNS tipo AS $$  
+[ DECLARE ] [ declaraciones de variables ]  
+BEGIN  
+codigo  
+END;  
+$$ LANGUAGE plpgsql ;
+```
+
+Declaracion de variables
+
+```sql
+CREATE Function Ejemplo2(integer, integer) ……  
+DECLARE  
+numero1 ALIAS FOR $1; // Primer parámetro  
+numero2 ALIAS FOR $2; // Segundo parámetro  
+constante CONSTANT integer := 100;  
+resultado INTEGER;  
+resultado_txt TEXT DEFAULT 'Texto por defecto';  
+tipo_reg voluntario%rowtype; // variable del tipo registro  
+tipo_col voluntario.nombre%type; // variable del tipo columna
+```
+
+
+Hay cursores que son variables que permiten acceder a las filas de un conjunto de datos en forma secuencial
+
+```sql
+nombre CURSOR [ ( argumentos ) ] FOR select_query ;
+```
+
+hay que manualmente liberar el cursor cuando uno termina de usarlo
+
+
+
+>[!note]
+>Recordemos la jerarquia de restricciones
+>1. **dominio/atributo**
+>2. **tupla**
+>3. **tabla**
+>4. **db**
+
+en general para las primeras 3 se deberia resolver declarativamente, el ultimo podria hacerse procedural
+
